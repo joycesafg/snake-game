@@ -5,7 +5,8 @@ Jogo da cobrinha nostálgico desenvolvido com Python e HTML.
 ## Tecnologias
 
 - Python 3.12+
-- Flask 3.0
+- FastAPI 0.115+
+- Uvicorn (ASGI server)
 - HTML5 Canvas
 - JavaScript
 - CSS3
@@ -22,13 +23,27 @@ uv sync
 uv run python main.py
 ```
 
+Ou usando Uvicorn diretamente:
+
+```bash
+uv run uvicorn main:app --host 0.0.0.0 --port 8000
+```
+
 O jogo estará disponível em `http://localhost:8000`
+
+## Testes
+
+Execute os testes com pytest:
+
+```bash
+uv run pytest tests/ -v
+```
 
 ## Estrutura do Projeto
 
 ```
 snake_game/
-├── main.py           # Servidor Flask
+├── main.py           # Servidor FastAPI
 ├── templates/        # Templates HTML
 │   └── index.html
 ├── static/          # Arquivos estáticos
@@ -36,6 +51,9 @@ snake_game/
 │   │   └── style.css
 │   └── js/
 │       └── game.js
+├── tests/           # Testes automatizados
+│   ├── __init__.py
+│   └── test_main.py
 └── pyproject.toml   # Dependências do projeto
 ```
 
