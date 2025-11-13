@@ -13,44 +13,44 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    color: #00ff00;
+    color: #ff1493;
 }
 
 .container {
     background: #0a0a0a;
     padding: 20px;
-    border: 4px solid #00ff00;
-    box-shadow: 0 0 20px #00ff00, inset 0 0 20px rgba(0, 255, 0, 0.1);
+    border: 4px solid #ff1493;
+    box-shadow: 0 0 20px #ff1493, inset 0 0 20px rgba(255, 20, 147, 0.1);
     border-radius: 10px;
 }
 
 .screen {
     background: #000000;
     padding: 20px;
-    border: 2px solid #00cc00;
+    border: 2px solid #ff69b4;
 }
 
 .header {
     text-align: center;
     margin-bottom: 15px;
     padding: 10px;
-    border-bottom: 2px solid #00ff00;
+    border-bottom: 2px solid #ff1493;
 }
 
 .header h1 {
     font-size: 48px;
     letter-spacing: 8px;
-    text-shadow: 0 0 10px #00ff00;
+    text-shadow: 0 0 10px #ff1493;
     margin-bottom: 10px;
     animation: glow 2s ease-in-out infinite alternate;
 }
 
 @keyframes glow {
     from {
-        text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+        text-shadow: 0 0 5px #ff1493, 0 0 10px #ff1493;
     }
     to {
-        text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
+        text-shadow: 0 0 10px #ff1493, 0 0 20px #ff1493, 0 0 30px #ff1493;
     }
 }
 
@@ -63,15 +63,15 @@ body {
 
 .score-board span {
     padding: 5px 15px;
-    border: 1px solid #00ff00;
-    background: rgba(0, 255, 0, 0.05);
+    border: 1px solid #ff1493;
+    background: rgba(255, 20, 147, 0.05);
 }
 
 #gameCanvas {
     display: block;
-    border: 3px solid #00ff00;
+    border: 3px solid #ff1493;
     background: #000000;
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5), inset 0 0 15px rgba(0, 255, 0, 0.1);
+    box-shadow: 0 0 15px rgba(255, 20, 147, 0.5), inset 0 0 15px rgba(255, 20, 147, 0.1);
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
     image-rendering: crisp-edges;
@@ -85,8 +85,8 @@ body {
 .info {
     font-size: 28px;
     padding: 10px;
-    background: rgba(0, 255, 0, 0.1);
-    border: 2px solid #00ff00;
+    background: rgba(255, 20, 147, 0.1);
+    border: 2px solid #ff1493;
     margin-bottom: 10px;
     animation: blink 1.5s infinite;
 }
@@ -103,7 +103,7 @@ body {
 .instructions {
     font-size: 20px;
     line-height: 1.8;
-    color: #00cc00;
+    color: #ff69b4;
 }
 
 .instructions p {
