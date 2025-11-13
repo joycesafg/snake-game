@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000000;
+    font-family: 'VT323', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #00ff00;
+}
+
+.container {
+    background: #0a0a0a;
+    padding: 20px;
+    border: 4px solid #00ff00;
+    box-shadow: 0 0 20px #00ff00, inset 0 0 20px rgba(0, 255, 0, 0.1);
+    border-radius: 10px;
+}
+
+.screen {
+    background: #000000;
+    padding: 20px;
+    border: 2px solid #00cc00;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-bottom: 2px solid #00ff00;
+}
+
+.header h1 {
+    font-size: 48px;
+    letter-spacing: 8px;
+    text-shadow: 0 0 10px #00ff00;
+    margin-bottom: 10px;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+    }
+    to {
+        text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
+    }
+}
+
+.score-board {
+    display: flex;
+    justify-content: space-around;
+    font-size: 24px;
+    margin-top: 10px;
+}
+
+.score-board span {
+    padding: 5px 15px;
+    border: 1px solid #00ff00;
+    background: rgba(0, 255, 0, 0.05);
+}
+
+#gameCanvas {
+    display: block;
+    border: 3px solid #00ff00;
+    background: #000000;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5), inset 0 0 15px rgba(0, 255, 0, 0.1);
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+.controls {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.info {
+    font-size: 28px;
+    padding: 10px;
+    background: rgba(0, 255, 0, 0.1);
+    border: 2px solid #00ff00;
+    margin-bottom: 10px;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0%, 50% {
+        opacity: 1;
+    }
+    51%, 100% {
+        opacity: 0.5;
+    }
+}
+
+.instructions {
+    font-size: 20px;
+    line-height: 1.8;
+    color: #00cc00;
+}
+
+.instructions p {
+    margin: 5px 0;
+}
+
+

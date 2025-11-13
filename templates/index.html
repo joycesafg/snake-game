@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game - Retro Edition</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="screen">
+            <div class="header">
+                <h1>SNAKE GAME</h1>
+                <div class="score-board">
+                    <span>PONTOS: <span id="score">0</span></span>
+                    <span>RECORDE: <span id="highScore">0</span></span>
+                </div>
+            </div>
+            
+            <canvas id="gameCanvas" width="400" height="400"></canvas>
+            
+            <div class="controls">
+                <div class="info" id="gameInfo">
+                    PRESSIONE ESPAÇO PARA INICIAR
+                </div>
+                <div class="instructions">
+                    <p>USE AS SETAS PARA MOVER</p>
+                    <p>ESPAÇO: INICIAR/PAUSAR</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/game.js') }}"></script>
+</body>
+</html>
+
+
