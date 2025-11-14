@@ -187,11 +187,6 @@ function startGame() {
     }
 }
 
-function handleSpaceKey(e) {
-    e.preventDefault();
-    startGame();
-}
-
 function changeDirection(newDx, newDy, canChange) {
     if (canChange) {
         dx = newDx;
@@ -200,7 +195,6 @@ function changeDirection(newDx, newDy, canChange) {
 }
 
 const CONTROLS = {
-    'Space': handleSpaceKey,
     'ArrowUp': () => changeDirection(0, -1, dy === 0),
     'ArrowDown': () => changeDirection(0, 1, dy === 0),
     'ArrowLeft': () => changeDirection(-1, 0, dx === 0),
@@ -208,16 +202,16 @@ const CONTROLS = {
 };
 
 document.addEventListener('keydown', (e) => {
-    const key = e.code === 'Space' ? 'Space' : e.key;
-    const handler = CONTROLS[key];
-
-    if (handler) {
-        if (key === 'Space') {
-            handler(e);
-        } else if (gameRunning && !gamePaused) {
-            handler();
-        }
+    if (e.code === 'Space') {
+        e.preventDefault();
+        startGame();
+        return;
     }
+
+    if (!gameRunning || gamePaused) return;
+
+    const handler = CONTROLS[e.key];
+    if (handler) handler();
 });
 
 function gameLoop() {
