@@ -123,22 +123,22 @@ function moveSnake() {
     snake.unshift(head);
 }
 
-function checkWallCollision(head) {
-    return head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount;
-}
+function checkCollision() {
+    const head = snake[0];
 
-function checkSelfCollision(head) {
+    // Check wall collision
+    if (head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount) {
+        return true;
+    }
+
+    // Check self collision
     for (let i = 1; i < snake.length; i++) {
         if (head.x === snake[i].x && head.y === snake[i].y) {
             return true;
         }
     }
-    return false;
-}
 
-function checkCollision() {
-    const head = snake[0];
-    return checkWallCollision(head) || checkSelfCollision(head);
+    return false;
 }
 
 function checkFoodCollision() {
