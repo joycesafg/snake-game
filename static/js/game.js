@@ -23,50 +23,27 @@ highScoreElement.textContent = highScore;
 function drawGame() {
     clearCanvas();
 
-    if (shouldUpdateGame()) {
-        updateGameLogic();
+    if (gameRunning && !gamePaused) {
+        moveSnake();
+
+        if (checkCollision()) {
+            gameOver();
+            return;
+        }
+
+        if (checkFoodCollision()) {
+            score++;
+            scoreElement.textContent = score;
+            updateHighScore();
+            generateFood();
+            adjustGameSpeed();
+        } else {
+            snake.pop();
+        }
     }
 
-    renderGame();
-}
-
-function shouldUpdateGame() {
-    return gameRunning && !gamePaused;
-}
-
-function updateGameLogic() {
-    moveSnake();
-
-    if (hasCollided()) {
-        handleGameOver();
-        return;
-    }
-
-    handleFoodInteraction();
-}
-
-function hasCollided() {
-    return checkCollision();
-}
-
-function handleGameOver() {
-    gameOver();
-}
-
-function handleFoodInteraction() {
-    if (checkFoodCollision()) {
-        incrementScore();
-        updateHighScore();
-        generateFood();
-        adjustGameSpeed();
-    } else {
-        removeSnakeTail();
-    }
-}
-
-function incrementScore() {
-    score++;
-    scoreElement.textContent = score;
+    drawFood();
+    drawSnake();
 }
 
 function updateHighScore() {
@@ -79,15 +56,6 @@ function updateHighScore() {
 
 function adjustGameSpeed() {
     gameSpeed = Math.max(80, 180 - score * 3);
-}
-
-function removeSnakeTail() {
-    snake.pop();
-}
-
-function renderGame() {
-    drawFood();
-    drawSnake();
 }
 
 function clearCanvas() {
