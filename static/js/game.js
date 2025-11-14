@@ -22,34 +22,40 @@ highScoreElement.textContent = highScore;
 
 function drawGame() {
     clearCanvas();
-    
+
     if (gameRunning && !gamePaused) {
         moveSnake();
-        
+
         if (checkCollision()) {
             gameOver();
             return;
         }
-        
+
         if (checkFoodCollision()) {
             score++;
             scoreElement.textContent = score;
-            
-            if (score > highScore) {
-                highScore = score;
-                highScoreElement.textContent = highScore;
-                localStorage.setItem('snakeHighScore', highScore);
-            }
-            
+            updateHighScore();
             generateFood();
-            gameSpeed = Math.max(80, 180 - score * 3);
+            adjustGameSpeed();
         } else {
             snake.pop();
         }
     }
-    
+
     drawFood();
     drawSnake();
+}
+
+function updateHighScore() {
+    if (score > highScore) {
+        highScore = score;
+        highScoreElement.textContent = highScore;
+        localStorage.setItem('snakeHighScore', highScore);
+    }
+}
+
+function adjustGameSpeed() {
+    gameSpeed = Math.max(80, 180 - score * 3);
 }
 
 function clearCanvas() {
@@ -123,20 +129,22 @@ function moveSnake() {
     snake.unshift(head);
 }
 
-function checkCollision() {
-    const head = snake[0];
-    
-    if (head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount) {
-        return true;
-    }
-    
+function checkWallCollision(head) {
+    return head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount;
+}
+
+function checkSelfCollision(head) {
     for (let i = 1; i < snake.length; i++) {
         if (head.x === snake[i].x && head.y === snake[i].y) {
             return true;
         }
     }
-    
     return false;
+}
+
+function checkCollision() {
+    const head = snake[0];
+    return checkWallCollision(head) || checkSelfCollision(head);
 }
 
 function checkFoodCollision() {
@@ -201,17 +209,37 @@ const CONTROLS = {
     'ArrowRight': () => changeDirection(1, 0, dx === 0)
 };
 
-document.addEventListener('keydown', (e) => {
-    if (e.code === 'Space') {
-        e.preventDefault();
-        startGame();
-        return;
+function handleSpaceKey(e) {
+    e.preventDefault();
+    startGame();
+}
+
+function changeDirection(newDx, newDy, canChange) {
+    if (canChange) {
+        dx = newDx;
+        dy = newDy;
     }
+}
 
-    if (!gameRunning || gamePaused) return;
+const CONTROLS = {
+    'Space': handleSpaceKey,
+    'ArrowUp': () => changeDirection(0, -1, dy === 0),
+    'ArrowDown': () => changeDirection(0, 1, dy === 0),
+    'ArrowLeft': () => changeDirection(-1, 0, dx === 0),
+    'ArrowRight': () => changeDirection(1, 0, dx === 0)
+};
 
-    const handler = CONTROLS[e.key];
-    if (handler) handler();
+document.addEventListener('keydown', (e) => {
+    const key = e.code === 'Space' ? 'Space' : e.key;
+    const handler = CONTROLS[key];
+
+    if (handler) {
+        if (key === 'Space') {
+            handler(e);
+        } else if (gameRunning && !gamePaused) {
+            handler();
+        }
+    }
 });
 
 function gameLoop() {
