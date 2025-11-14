@@ -187,40 +187,36 @@ function startGame() {
     }
 }
 
-document.addEventListener('keydown', (e) => {
-    if (e.code === 'Space') {
-        e.preventDefault();
-        startGame();
-        return;
+function handleSpaceKey(e) {
+    e.preventDefault();
+    startGame();
+}
+
+function changeDirection(newDx, newDy, canChange) {
+    if (canChange) {
+        dx = newDx;
+        dy = newDy;
     }
-    
-    if (!gameRunning || gamePaused) return;
-    
-    switch (e.key) {
-        case 'ArrowUp':
-            if (dy === 0) {
-                dx = 0;
-                dy = -1;
-            }
-            break;
-        case 'ArrowDown':
-            if (dy === 0) {
-                dx = 0;
-                dy = 1;
-            }
-            break;
-        case 'ArrowLeft':
-            if (dx === 0) {
-                dx = -1;
-                dy = 0;
-            }
-            break;
-        case 'ArrowRight':
-            if (dx === 0) {
-                dx = 1;
-                dy = 0;
-            }
-            break;
+}
+
+const CONTROLS = {
+    'Space': handleSpaceKey,
+    'ArrowUp': () => changeDirection(0, -1, dy === 0),
+    'ArrowDown': () => changeDirection(0, 1, dy === 0),
+    'ArrowLeft': () => changeDirection(-1, 0, dx === 0),
+    'ArrowRight': () => changeDirection(1, 0, dx === 0)
+};
+
+document.addEventListener('keydown', (e) => {
+    const key = e.code === 'Space' ? 'Space' : e.key;
+    const handler = CONTROLS[key];
+
+    if (handler) {
+        if (key === 'Space') {
+            handler(e);
+        } else if (gameRunning && !gamePaused) {
+            handler();
+        }
     }
 });
 
