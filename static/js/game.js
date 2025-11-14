@@ -123,21 +123,13 @@ function moveSnake() {
     snake.unshift(head);
 }
 
-function isOutOfBounds(coordinate, maxBounds) {
-    return coordinate < 0 || coordinate >= maxBounds;
-}
-
 function checkWallCollision(head) {
-    return isOutOfBounds(head.x, tileCount) || isOutOfBounds(head.y, tileCount);
-}
-
-function isSamePosition(pos1, pos2) {
-    return pos1.x === pos2.x && pos1.y === pos2.y;
+    return head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount;
 }
 
 function checkSelfCollision(head) {
     for (let i = 1; i < snake.length; i++) {
-        if (isSamePosition(head, snake[i])) {
+        if (head.x === snake[i].x && head.y === snake[i].y) {
             return true;
         }
     }
